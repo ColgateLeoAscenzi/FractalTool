@@ -45,7 +45,7 @@ function resetIteration(){
 	  while (bodyObj.firstChild) {
 		bodyObj.removeChild(bodyObj.firstChild);
 	  }
-	word = "";
+	word = ABLsystem.axiom;
 	generation=0;
 	
 }
