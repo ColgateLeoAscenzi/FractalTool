@@ -1,9 +1,3 @@
-// newCoords[0] = oldCoords[0];
-// newCoords[1] = oldCoords[1];
-// newCoords[2] = oldCoords[2];
-// newCoords[3] = oldCoords[3];
-// newCoords[4] = oldCoords[4];
-// newCoords[5] = oldCoords[5];
 
 // -------------- FILLED SHAPE FUNCTIONS -----------------------//
 function filledTriangle(color, vertices){
@@ -35,34 +29,6 @@ function filledTriangle(color, vertices){
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
 
-// ------------------- geometry shape helper -----------------------//
-// function shape(center, color, sideNum, sideLength){
-//     var sumOfIntAng = (sideNum-2)*180;
-//     var newColor = [];
-//     //generates new uniform colors if not specified
-//     if(color.length == 1){
-//         for(var i = 0; i < sideNum; i++){
-//             newColor.push(uniformColorGen(color[0], sideNum));
-//         }
-//     }
-//     else{
-//         newColor = color;
-//     }
-//     //aligns it so the bottom is flat
-//     pushTransform();
-//         transform.rotate(radians((-sumOfIntAng)/(2*sideNum)));
-//         transform.scale(3/sideNum);
-//         for(var i = 0; i < sideNum; i++){
-//             //makes triangles and rotate
-//             pushTransform();
-//                 transform.rotate(radians(360/sideNum)*i);
-//                 filledTriangle(newColor[i], genTriangle(center, sideLength, [(360/sideNum), (180-(360/sideNum))/2,(180-(360/sideNum))/2]));
-//             popTransform();
-//
-//         }
-//     popTransform();
-//
-// }
 function shape(center, newC, color, sideNum, sideLength){
     var sumOfIntAng = (sideNum-2)*180;
     var newColor = [];
@@ -126,29 +92,6 @@ function fixCenter(oldCoords, newC, angle, sideNum){
     return newCoords;
 }
 
-//-------Actual shapes to draw-----------//
-function triangle(center, color, side){
-        shape(center, color, 3, side);
-}
-function square(center, color, side){
-    shape(center, color, 4, side);
-}
-function pentagon(center, color, side){
-    shape(center, color, 5, side);
-}
-function hexagon(center, color, side){
-    shape(center, color, 6, side);
-}
-
-//*------------------ Helpers ---------------------------//
-function unrotate(oldPoint, rotationAngle, sideNum){
-    var sumOfIntAng = (sideNum-2)*180;
-    var nP = [oldPoint[0], oldPoint[1]];
-    var nPP = cartToPolar(nP);
-    var nC = polarToCart([nPP[0], nPP[1]-degrees(rotationAngle)-((-sumOfIntAng)/(2*sideNum))]);
-    return nC;
-}
-
 function uniformColorGen(color, sides){
     var colorArr = [];
     for(var i = 0; i < sides; i++){
@@ -195,50 +138,3 @@ function cartToPolar(cPoint){
     return [Math.sqrt(nx*nx + ny*ny), Math.atan2(ny, nx)*(180.0/Math.PI)];
 }
 
-
-
-function shinePos(lightPos, circleCenter){
-    var lx = lightPos[0];
-    var ly = lightPos[1];
-    var cx = circleCenter[0];
-    var cy = circleCenter[1];
-
-    //subtract circle center from lightsource to get lightsource adjusted to 0
-    //convert to polar and shorten radius by theoretical Z axis, here 1/7th of
-    //original R. Convert back to cartesian centered around 0, then add circleCenter
-    //back to get the official light center and return it
-    var shineP = cartToPolar([lx-cx,ly-cy]);
-
-    var shineC = polarToCart([shineP[0]/3, shineP[1]]);
-
-    shineC[0]+=cx;
-    shineC[1]+=cy;
-
-    return shineC;
-
-}
-
-function calculateShadowColor(defaultVal){
-    if(defaultVal == true){
-        return [[0.6,0.6,0.6,1]];
-    }
-    else{
-        //subtract each time the alpha value of the ball
-        var sub = colors[1][3];
-        var lightColor = colors[0];
-        var ballColor = colors[1];
-        var avg = []
-        //merges the colors
-        for(var i = 0; i < lightColor.length; i++){
-            avg.push((lightColor[i]+ballColor[i])/2);
-        }
-        //makes sure they can't go above 255 or below 0
-        var newCol = []
-        for(var i = 0; i < 3; i++){
-            newCol.push(Math.min(Math.max(0, avg[i]-sub), 255));
-        }
-        newCol.push(1);
-
-        return [newCol];
-    }
-}
