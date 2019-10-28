@@ -45,6 +45,7 @@ function resetIteration(){
 	  while (bodyObj.firstChild) {
 		bodyObj.removeChild(bodyObj.firstChild);
 	  }
+	word = "";
 	generation=0;
 	
 }
