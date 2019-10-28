@@ -1,20 +1,42 @@
 var defCenter = [0,0];
 var defSideLen = 1;
+var word = []
 
-
+var ABrule1 = {
+	"in": "A",
+	"out": "AB"
+}
+var ABrule2 = {
+	"in": "B",
+	"out": "A"
+}
+var ABLsystem = {
+	"rules": [ABrule1, ABrule2],
+	"axiom": "A",
+	"alphabet": ["A","B"]
+}
 
 function doLSystem(){
-	//does nothing yet
-	//does nothing yet
+	word = [ABLsystem.axiom];
+	generateIteration();
 	
 }
 
 function generateIteration(){
 	var addDiv = document.createElement("div");
 	addDiv.id = "gen"+generation;
-	addDiv.append(nextGeneration());
-	document.getElementById("string-container").append(addDiv);
-	generation++;
+	if(generation == 0){
+		addDiv.append(ABLsystem.axiom);
+		document.getElementById("string-container").append(addDiv);
+		generation++;
+	}
+	else{
+		word = nextGeneration();
+		addDiv.append(word);
+		document.getElementById("string-container").append(addDiv);
+		generation++;
+	}
+
 	
 }
 
@@ -28,11 +50,16 @@ function resetIteration(){
 }
 
 function nextGeneration(){
-	var word = ""
-	for(var i = 0; i < generation; i++){
-		word+= "AB";
+	var outWord = ""
+	for(var i = 0; i < word.length; i++){
+		var currChar = word[i];
+		for(var j = 0; j < ABLsystem.rules.length;j++){
+			if(ABLsystem.rules[j].in == currChar){
+				outWord += ABLsystem.rules[j].out;
+			}
+		}
 	}
-	return word
+	return outWord
 }
 
 function drawFractalDemo(){
