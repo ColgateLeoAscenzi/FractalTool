@@ -10,7 +10,11 @@ var rule2 = {
 var Lsystem = {
 	"rules": [rule1, rule2],
 	"axiom": "0",
-	"alphabet": ["0","1","[","]"]
+	"alphabet": ["0","1","[","]"],
+	"definitions": ["0:shape([0,0], [0,0], [[0.4,0,0.4,1]], 3, 1/(generation+1))",
+					"1:shape([0,0], [0,0], [[0,1,0,1]], 3, 1/(generation+1))",
+					"[:transform.translate(0.2+(generation/10),0.2+(generation/10))",
+					"]:transform.translate(-0.2+(generation/10),0.2+(generation/10))"]
 }
 
 
@@ -28,7 +32,7 @@ function generateIteration(){
 		document.getElementById("string-container").append(addDiv);
 		generation++;
 	}
-
+	
 	
 }
 

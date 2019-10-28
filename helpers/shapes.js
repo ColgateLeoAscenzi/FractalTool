@@ -50,7 +50,6 @@ function shape(center, newC, color, sideNum, sideLength){
             pushTransform();
                 transform.rotate(radians(360/sideNum)*i);
                 var tempTriCoords = genTriangle(center, sideLength, [(360/sideNum), (180-(360/sideNum))/2,(180-(360/sideNum))/2]);
-                tempTriCoords = fixCenter(tempTriCoords, newC, radians(360/sideNum)*i, sideNum);
                 filledTriangle(newColor[i], tempTriCoords);
             popTransform();
 
@@ -78,19 +77,6 @@ function genTriangle(center, side, angles){
     return triCoord;
 }
 
-function fixCenter(oldCoords, newC, angle, sideNum){
-    newCoords = []
-    var unRotated = unrotate([newC[0], newC[1]], angle, sideNum);
-    newCoords[0] = unRotated[0];
-    newCoords[1] = unRotated[1];
-    newCoords[2] = oldCoords[2];
-    newCoords[3] = oldCoords[3];
-    newCoords[4] = oldCoords[4];
-    newCoords[5] = oldCoords[5];
-
-
-    return newCoords;
-}
 
 function uniformColorGen(color, sides){
     var colorArr = [];

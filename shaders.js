@@ -202,10 +202,10 @@ function changeDrawing(){
         
     }
     if(scene== 1){
-        document.getElementById("tri-color-control").style.display = "block";
+        document.getElementById("tri-color-control").style.display = "none";
 		document.getElementById("canvas-holder").style.display = "block";
-        document.getElementById("fractal-control").style.display = "none";
-		document.getElementById("lsystem-container").style.display = "none"
+        document.getElementById("fractal-control").style.display = "block";
+		document.getElementById("lsystem-container").style.display = "block"
         doChangeColorTri();
     }
 
