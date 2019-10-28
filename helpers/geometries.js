@@ -2,19 +2,7 @@ var defCenter = [0,0];
 var defSideLen = 1;
 var word = []
 
-var ABrule1 = {
-	"in": "A",
-	"out": "AB"
-}
-var ABrule2 = {
-	"in": "B",
-	"out": "A"
-}
-var ABLsystem = {
-	"rules": [ABrule1, ABrule2],
-	"axiom": "A",
-	"alphabet": ["A","B"]
-}
+
 
 function doLSystem(){
 	word = [ABLsystem.axiom];
