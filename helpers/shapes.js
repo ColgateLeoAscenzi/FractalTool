@@ -29,7 +29,34 @@ function filledTriangle(color, vertices){
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
 
-function shape(center, newC, color, sideNum, sideLength){
+function drawLine(sx, sy, angle, linelength, mcolor){
+    var newColor =(uniformColorGen(mcolor, 2));
+
+
+    var vertices = [sx,sy, sx+linelength*Math.cos(radians(angle)), sy+linelength*Math.sin(radians(angle))];
+
+    lineVBO = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, lineVBO);
+    var lineCoords = new Float32Array(vertices);
+    gl.bufferData(gl.ARRAY_BUFFER, lineCoords, gl.STATIC_DRAW);
+
+    lineColorVBO = gl.createBuffer()
+    gl.uniformMatrix3fv(transformUniformLocation, false, transform.getMat3());
+    //position
+    gl.bindBuffer(gl.ARRAY_BUFFER, lineVBO);
+    gl.vertexAttribPointer(vertexAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(vertexAttributeLocation);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, lineColorVBO);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(newColor), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(colorAttribLocation, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(colorAttribLocation);
+
+    gl.drawArrays(gl.LINES, 0, 2);
+
+}
+
+function shape(center, color, sideNum, sideLength){
     var sumOfIntAng = (sideNum-2)*180;
     var newColor = [];
     //generates new uniform colors if not specified
@@ -123,4 +150,3 @@ function cartToPolar(cPoint){
 
     return [Math.sqrt(nx*nx + ny*ny), Math.atan2(ny, nx)*(180.0/Math.PI)];
 }
-

@@ -134,9 +134,9 @@ function initGL() {
         var prog = createProgram( gl, vertexShaderSource, fragmentShaderSource );
         gl.useProgram(prog);
 
-        gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA,
-                                  gl.ZERO, gl.ONE );
-        gl.enable(gl.BLEND)
+        // gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA,
+        //                           gl.ZERO, gl.ONE );
+        // gl.enable(gl.BLEND)
 
         vertexAttributeLocation = gl.getAttribLocation(prog, "vertexCoords");
         transformUniformLocation = gl.getUniformLocation(prog, "coordinateTransform");
