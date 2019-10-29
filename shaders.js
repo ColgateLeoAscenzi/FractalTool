@@ -199,7 +199,7 @@ function changeDrawing(){
 		document.getElementById("tri-color-control").style.display = "none";
         document.getElementById("fractal-control").style.display = "block";
 		document.getElementById("lsystem-container").style.display = "block"
-        
+
     }
     if(scene== 1){
         document.getElementById("tri-color-control").style.display = "none";
@@ -210,4 +210,3 @@ function changeDrawing(){
     }
 
 }
-

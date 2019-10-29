@@ -19,6 +19,7 @@ var Lsystem = {
 
 
 function generateIteration(){
+	console.log(Lsystem);
 	var addDiv = document.createElement("div");
 	addDiv.id = "gen"+generation;
 	if(generation == 0){
@@ -32,8 +33,8 @@ function generateIteration(){
 		document.getElementById("string-container").append(addDiv);
 		generation++;
 	}
-	
-	
+
+
 }
 
 function resetIteration(){
@@ -43,7 +44,7 @@ function resetIteration(){
 	  }
 	word = Lsystem.axiom;
 	generation=0;
-	
+
 }
 
 function nextGeneration(){
@@ -60,6 +61,20 @@ function nextGeneration(){
 }
 
 function submitRules(){
+	var newRules = [];
+	Lsystem.alphabet = document.getElementById("alphabetIn").value.split(",");
+	Lsystem.axiom = document.getElementById("axiomIn").value;
+	var rulesArr = document.getElementById("rulesIn").value.split(",");
+	for(var i = 0; i < rulesArr.length; i++){
+		var currRuleArr = rulesArr[i].split(":");
+		var newRule = {"in":null, "out":null};
+		newRule.in = currRuleArr[0];
+		newRule.out = currRuleArr[1];
+		newRules.push(newRule);
+
+	}
+	Lsystem.rules = newRules;
+
 	var rules = "";
 	for(var i = 0; i < Lsystem.rules.length; i++){
 		if(i == Lsystem.rules.length-1){
@@ -68,9 +83,9 @@ function submitRules(){
 		else{
 			rules += Lsystem.rules[i].in + " -> " + Lsystem.rules[i].out+ ", "
 		}
-		
-		
+
+
 	}
-	document.getElementById("rules").innerHTML = "Alphabet = ("+ Lsystem.alphabet + ")<br>Rules: ("+rules+")<br>Axiom: ("+Lsystem.axiom+") "; 
-	
+	document.getElementById("rules").innerHTML = "Alphabet = ("+ Lsystem.alphabet + ")<br>Rules: ("+rules+")<br>Axiom: ("+Lsystem.axiom+") ";
+
 }

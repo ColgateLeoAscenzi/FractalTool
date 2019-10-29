@@ -23,8 +23,8 @@
         <option >Fractal Demo</option>
     </select>
 </div>
-	
-	
+
+
 <div id = "fractal-control">
     <div id = "button-container">
 		<button onClick = "generateIteration()">Generate!</button>
@@ -35,10 +35,19 @@
 
 <div id = "lsystem-container">
 	<div id = "rules"></div>
-	<div id = "string-container"></div>
+    <div id = "ruleControl">
+        Alphabet:
+        <input type ="text" value = "0,1,[,]" id = "alphabetIn">
+        Axiom:
+        <input type ="text" value = "0" id = "axiomIn">
+        Rules:
+        <input type ="text" value = "1:1,0:1[0]0" id = "rulesIn">
+    </div>
+    <div id = "string-container"></div>
+
 </div>
 
-	
+
 
 <div id = "tri-color-control">
     <div id = "tri-angles">
