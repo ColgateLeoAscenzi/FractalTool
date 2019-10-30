@@ -7,15 +7,28 @@ var rule2 = {
 	"in": "0",
 	"out": "1[0]0"
 }
+var Ldefinitions = new Object();
+Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
+		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
+         "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+          "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+
+Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
+          "transformStack.push(copy);"+
+          "currentPos[2] += 45;";
+Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
+          "currentPos[2] -= 45;";
+
 var Lsystem = {
 	"rules": [rule1, rule2],
 	"axiom": "0",
 	"alphabet": ["0","1","[","]"],
-	"definitions": ["0:",
-					"1:",
-					"[:",
-					"]:)"]
+	"definitions": Ldefinitions
 }
+
+
 
 
 function generateIteration(){
@@ -45,6 +58,7 @@ function resetIteration(){
 	  }
 	word = Lsystem.axiom;
 	generation=0;
+	
 
 }
 
@@ -94,5 +108,45 @@ function submitRules(){
 
 	}
 	document.getElementById("rules").innerHTML = "Alphabet = ("+ Lsystem.alphabet + ")<br>Rules: ("+rules+")<br>Axiom: ("+Lsystem.axiom+") ";
+	
+	//<button onClick = "submitRules()">Add L-System</button>
+	setupCode();
 
+}
+
+function setupCode(){
+	var defContainer = document.createElement("div");
+	defContainer.id = "definitionsAssign";
+	document.getElementById("lsystem-container").append(defContainer);
+	console.log(Lsystem.alphabet);
+	for(var i = 0; i < Lsystem.alphabet.length; i++){
+		var addDiv = document.createElement("div");
+		addDiv.innerHTML = "  "+Lsystem.alphabet[i]+"  : <input type ='text' value = 'Enter an encoded rule' id = 'definition+"+Lsystem.alphabet[i]+"'>"
+		document.getElementById("definitionsAssign").append(addDiv);
+	}
+	var submitButton = document.createElement("div");
+	submitButton.innerHTML = '<button onClick = "createDefinitions()">Submit Definitions</button>'
+	definitionsAssign.append(submitButton);
+	
+	
+}
+
+function createDefinitions(){
+	
+Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
+		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
+         "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+          "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+
+Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
+          "transformStack.push(copy);"+
+          "currentPos[2] += 45;";
+Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
+          "currentPos[2] -= 45;";
+	console.log("Submitted!");
+	
+	document.getElementById("definitionsAssign").remove();
+	
 }

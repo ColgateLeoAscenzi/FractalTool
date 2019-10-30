@@ -162,7 +162,7 @@ function initGL() {
 	document.getElementById("tri-color-control").style.display = "none";
 	document.getElementById("canvas-holder").style.display = "none";
 	document.getElementById("selector").onchange = changeDrawing;
-
+	doLSystem();
 
     draw();    // draw the image
 
