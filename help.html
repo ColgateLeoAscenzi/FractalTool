@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Help</title>
+</head>
+<body>
+<h1>Help</h1>
+<h2>Functions</h2>
+
+<ul>
+    <li><b>shape(center, color, sideNum, sideLength)</b><br>
+        <i>Usage: Draw any polygon of side number, sideNum with radius, sideLength around a point [x, y] and a color</i></li>
+    <li><b>drawLine(sx, sy, angle, linelength, mcolor)</b><br>
+        <i>Usage: Draws a line from point sx,sy at an angle from 0 with a linelength and color</i></li>
+    <li><b>degrees( radians )</b><br>
+        <i>Usage: Takes an angle in radians and returns degrees</i></li>
+    <li><b>radians( degrees )</b><br>
+        <i>Usage: Takes an angle in degrees and returns the radians </i></li>
+</ul>
+
+<h2>Variables</h2>
+
+<ul>
+    <li><b>transformStack = []</b><br>
+        <i>Usage: Type is array, can use transformStack.push(element) and transformStack.pop()</i></li>
+    <li><b>currentPos = [0,0,0]</b><br>
+        <i>Usage: Represents an X, Y and Angle given where the next drawing will start. Push and pop this to save progress</i></li>
+    <li><b>startSize = 0.1</b><br>
+        <i>Usage: A useful variable to store the starting line length</i></li>
+</ul>
+
+<h2>Example Usage</h2>
+
+<ul>
+    <li><b>drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;</b><br>
+        <i>Meaning: Draws a line from the current x and y at current angle theta (currentPos = [x,y,theta] with length of startSize and red, then calculates the next position of the tip and stores it in currentPos</i></li>
+    <li><b>var copy = [currentPos[0], currentPos[1], currentPos[2]];transformStack.push(copy);currentPos[2] += 45;</b><br>
+        <i>Meaning: Pushes the current x, y and theta to the stack and then increases the angle by 45</i></li>
+    <li><b>currentPos = transformStack.pop();currentPos[2] -= 45;</b><br>
+        <i>Meaning: Pops the top of the stack, aka the last saved x, y and z and sets it to the current one, then decreases angle by 45</i></li>
+</ul>
+
+
+</body>
+</html>
