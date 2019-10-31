@@ -15,6 +15,12 @@
         <i>Usage: Takes an angle in radians and returns degrees</i></li>
     <li><b>radians( degrees )</b><br>
         <i>Usage: Takes an angle in degrees and returns the radians </i></li>
+    <!-- <li><b>drawForward(distance, color)</b><br>
+        <i>Usage: Draws forward a set distance </i></li>
+    <li><b>changeAngle(newAngle)</b><br>
+        <i>Usage: Updates Angle</i></li> -->
+
+
 </ul>
 
 <h2>Variables</h2>
@@ -55,6 +61,16 @@
         <i>Meaning: Pops current angle</i></li>
 </ul>
 
+<h3>Dragon Curve</h3>
+<ul>
+    <li><b>Alphabet: X,Y,F,+,-        Axiom:      FX         Rules:X:X+YG+,Y-FX-Y</b></li>
+    <li>F :<b>drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [250/255,100/255,60/255,1]);currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;</b><br>
+        <i>Meaning:Draws a line and calculates new start point</i></li>
+    <li>+ :<b>currentPos[2] -= 90;</b><br>
+        <i>Meaning: Decreases current angle by 90</i></li>
+    <li>- :<b>currentPos[2] += 90;</b><br>
+        <i>Meaning: Increases current angle by 90</i></li>
+</ul>
 
 </body>
 </html>

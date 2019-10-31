@@ -10,14 +10,16 @@ function drawFractalDemo(word){
 
 	var startSize = 0.01;
     //adjust for canvas aspect ratio
-        transform.scale(0.66666,1);
+        // transform.scale(0.66666,1);
 		// transform.translate(0,-0.8);
         var currentPos = [0,0,0];
         var transformStack = [];
         var newWord = word
         for(var i = 0; i < newWord.length; i++){
 				var definitionsHash = Lsystem.definitions;
-				eval(definitionsHash[newWord[i]]);
+                var newRule = eval(definitionsHash[newWord[i]])
+                // console.log(newRule);
+				// eval(newRule);
         }
     popTransform();
 }

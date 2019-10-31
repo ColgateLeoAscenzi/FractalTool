@@ -56,6 +56,17 @@ function drawLine(sx, sy, angle, linelength, mcolor){
 
 }
 
+// function drawForward(distance, color){
+//     if(color == undefined){
+//         color = [1,0,0,1];
+//     }
+//     return "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]");currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;"
+// }
+//
+// function changeAngle(newAngle){
+//     return "currentPos[2] += "+newAngle;
+// }
+
 function shape(center, color, sideNum, sideLength){
     var sumOfIntAng = (sideNum-2)*180;
     var newColor = [];
