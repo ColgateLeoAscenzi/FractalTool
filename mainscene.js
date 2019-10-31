@@ -32,7 +32,7 @@ function drawForward(distance, color){
     if(color == undefined){
         color = [1,0,0,1];
     }
-    drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);
+    drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, color);
     currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;
     currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;
 }

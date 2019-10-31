@@ -148,19 +148,6 @@ function setupCode(){
 
 function createDefinitions(){
 
-	// Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
-	// 		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
-	// 		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
-	// Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
-	//          "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
-	//           "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
-	//
-	// Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
-	//           "transformStack.push(copy);"+
-	//           "currentPos[2] += 45;";
-	// Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
-	//           "currentPos[2] -= 45;";
-
     for(var i = 0; i < Lsystem.alphabet.length; i++){
 		Ldefinitions[Lsystem.alphabet[i]] = document.getElementById("definition+"+Lsystem.alphabet[i]).value;
 	}
