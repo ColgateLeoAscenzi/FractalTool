@@ -60,6 +60,8 @@ var angles = [60, 60, 60];
 
 var generation = 0;
 
+var mode = "text";
+
 
 //Transforms
 var transform = new AffineTransform2D();
@@ -199,6 +201,7 @@ function changeDrawing(){
 		document.getElementById("tri-color-control").style.display = "none";
         document.getElementById("fractal-control").style.display = "block";
 		document.getElementById("lsystem-container").style.display = "block"
+        mode = "text";
 
     }
     if(scene== 1){
@@ -207,6 +210,7 @@ function changeDrawing(){
         document.getElementById("fractal-control").style.display = "block";
 		document.getElementById("lsystem-container").style.display = "block"
         doChangeColorTri();
+        mode = "picture";
     }
 
 }

@@ -36,14 +36,19 @@ function generateIteration(){
 	var addDiv = document.createElement("div");
 	addDiv.id = "gen"+generation;
 	if(generation == 0){
-		addDiv.append(Lsystem.axiom);
-		document.getElementById("string-container").append(addDiv);
+		if(mode == "text"){
+			addDiv.append(Lsystem.axiom);
+			document.getElementById("string-container").append(addDiv);
+		}
 		generation++;
 	}
 	else{
 		word = nextGeneration();
-		addDiv.append(word);
-		document.getElementById("string-container").append(addDiv);
+		if(mode == "text"){
+			addDiv.append(word);
+			document.getElementById("string-container").append(addDiv);
+		}
+
 		generation++;
 	}
 
