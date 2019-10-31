@@ -8,24 +8,24 @@ var rule2 = {
 	"out": "1[0]0"
 }
 var Ldefinitions = new Object();
-Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
-		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
-		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
-Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
-         "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
-          "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
-
-Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
-          "transformStack.push(copy);"+
-          "currentPos[2] += 45;";
-Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
-          "currentPos[2] -= 45;";
+// Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
+// 		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+// 		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+// Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
+//          "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+//           "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+//
+// Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
+//           "transformStack.push(copy);"+
+//           "currentPos[2] += 45;";
+// Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
+//           "currentPos[2] -= 45;";
 
 var Lsystem = {
 	"rules": [rule1, rule2],
 	"axiom": "0",
 	"alphabet": ["0","1","[","]"],
-	"definitions": Ldefinitions
+	"definitions": undefined
 }
 
 
@@ -47,7 +47,8 @@ function generateIteration(){
 		generation++;
 	}
 
-	drawFractalDemo(word);
+	// drawFractalDemo(word);
+	draw();
 
 }
 
@@ -58,7 +59,8 @@ function resetIteration(){
 	  }
 	word = Lsystem.axiom;
 	generation=0;
-	
+
+
 
 }
 
@@ -83,6 +85,14 @@ function nextGeneration(){
 
 function submitRules(){
 	var newRules = [];
+	Lsystem.alphabet = undefined;
+	Lsystem.axiom = undefined;
+	Lsystem.rules = undefined;
+	Lsystem.definitions = undefined;
+	Ldefinitions = new Object();
+
+
+
 	Lsystem.alphabet = document.getElementById("alphabetIn").value.split(",");
 	Lsystem.axiom = document.getElementById("axiomIn").value;
 	var rulesArr = document.getElementById("rulesIn").value.split(",");
@@ -108,7 +118,7 @@ function submitRules(){
 
 	}
 	document.getElementById("rules").innerHTML = "Alphabet = ("+ Lsystem.alphabet + ")<br>Rules: ("+rules+")<br>Axiom: ("+Lsystem.axiom+") ";
-	
+
 	//<button onClick = "submitRules()">Add L-System</button>
 	setupCode();
 
@@ -127,26 +137,33 @@ function setupCode(){
 	var submitButton = document.createElement("div");
 	submitButton.innerHTML = '<button onClick = "createDefinitions()">Submit Definitions</button>'
 	definitionsAssign.append(submitButton);
-	
-	
+
+
 }
 
 function createDefinitions(){
-	
-Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
-		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
-		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
-Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
-         "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
-          "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
 
-Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
-          "transformStack.push(copy);"+
-          "currentPos[2] += 45;";
-Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
-          "currentPos[2] -= 45;";
+	// Ldefinitions["0"] = "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);"+
+	// 		"currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+	// 		"currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+	// Ldefinitions["1"] =  "drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [0,0,1,1]);"+
+	//          "currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;"+
+	//           "currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;";
+	//
+	// Ldefinitions["["] = "var copy = [currentPos[0], currentPos[1], currentPos[2]];"+
+	//           "transformStack.push(copy);"+
+	//           "currentPos[2] += 45;";
+	// Ldefinitions["]"] =  "currentPos = transformStack.pop();"+
+	//           "currentPos[2] -= 45;";
+
+    for(var i = 0; i < Lsystem.alphabet.length; i++){
+		Ldefinitions[Lsystem.alphabet[i]] = document.getElementById("definition+"+Lsystem.alphabet[i]).value;
+	}
+
 	console.log("Submitted!");
-	
+	console.log(Ldefinitions);
+	Lsystem.definitions = Ldefinitions;
+
 	document.getElementById("definitionsAssign").remove();
-	
+
 }

@@ -29,14 +29,30 @@
 </ul>
 
 <h2>Example Usage</h2>
-
+<h3>45 Degree Binary Tree</h3>
 <ul>
-    <li><b>drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;</b><br>
+    <li><b>Alphabet: 0,1,[,].    Axiom:     0.     Rules 1:11,0:1[0]0</b></li>
+    <li>0 or 1: <b>drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [1,0,0,1]);currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;</b><br>
         <i>Meaning: Draws a line from the current x and y at current angle theta (currentPos = [x,y,theta] with length of startSize and red, then calculates the next position of the tip and stores it in currentPos</i></li>
-    <li><b>var copy = [currentPos[0], currentPos[1], currentPos[2]];transformStack.push(copy);currentPos[2] += 45;</b><br>
+    <li>[ :<b>var copy = [currentPos[0], currentPos[1], currentPos[2]];transformStack.push(copy);currentPos[2] += 45;</b><br>
         <i>Meaning: Pushes the current x, y and theta to the stack and then increases the angle by 45</i></li>
-    <li><b>currentPos = transformStack.pop();currentPos[2] -= 45;</b><br>
+    <li>] :<b>currentPos = transformStack.pop();currentPos[2] -= 45;</b><br>
         <i>Meaning: Pops the top of the stack, aka the last saved x, y and z and sets it to the current one, then decreases angle by 45</i></li>
+</ul>
+
+<h3>Barnsley Fern</h3>
+<ul>
+    <li><b>Alphabet: X,F,+,-,[,]        Axiom:      X         Rules:X:F+[[X]-X]-F[-FX]+X,F:FF</b></li>
+    <li>F :<b>drawLine(currentPos[0],currentPos[1],currentPos[2], startSize, [250/255,100/255,60/255,1]);currentPos[0]+= Math.cos(radians(currentPos[2]))*startSize;currentPos[1]+= Math.sin(radians(currentPos[2]))*startSize;</b><br>
+        <i>Meaning:Draws a line and calculates new start point</i></li>
+    <li>+ :<b>currentPos[2] -= 25;</b><br>
+        <i>Meaning: Decreases current angle by 25</i></li>
+    <li>- :<b>currentPos[2] += 25;</b><br>
+        <i>Meaning: Increases current angle by 25</i></li>
+    <li>- :<b>var copy = [currentPos[0], currentPos[1], currentPos[2]];transformStack.push(copy);</b><br>
+        <i>Meaning: Pushes current position and angle</i></li>
+    <li>- :<b>currentPos = transformStack.pop();</b><br>
+        <i>Meaning: Pops current angle</i></li>
 </ul>
 
 
